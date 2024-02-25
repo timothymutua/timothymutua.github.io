@@ -1,0 +1,33 @@
+body {
+font-family: Arial, Helvetica, sans-serif;
+background-image: url("image.jpg");
+height: 100%; 
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+margin: 0;
+padding: 0;
+width: 100%; /* Adjust as needed */
+color: black;
+text-align: center; /* Center-align all text content */
+}
+.container {
+margin: 0 auto;
+padding: 0 auto;
+display: inline-block; /* To center-align the container itself */
+text-align: left; /* Reset text alignment for the container content */
+}
+h2 {
+text-align: center; /* Center-align heading */
+}
+p {
+line-height: 2;
+opacity: 80%;
+}
+iframe {
+display:inline-block;
+margin: 0 auto; /* Center-align iframe */
+}
+footer {
+text-align: center; /* Center-align footer content */
+}
