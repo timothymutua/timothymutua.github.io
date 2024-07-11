@@ -12,11 +12,6 @@ body {
     justify-content: center;
     height: 100vh;
 }
-.icon{
-    width:200px;
-    height: 75px;
-    float: left;
-}
 .video-container {
     position: relative;
     width: 80%;
