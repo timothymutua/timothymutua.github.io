@@ -1,7 +1,6 @@
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(to top, rgba(0,0,0,0.5)50%, rgba(0,0,0,0.5)50%), url(bg.jpg);
-    background-color: #000;
     color: #fff;
     text-align: center;
 }
