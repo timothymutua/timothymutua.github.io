@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(to top, rgba(0,0,0,0.5)50%, rgba(0,0,0,0.5)50%), url(bg.jpg);
-    color: #fff;
+    color: #000;
     text-align: center;
 }
 .container {
