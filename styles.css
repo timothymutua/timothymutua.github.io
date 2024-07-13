@@ -18,7 +18,7 @@ body {
 }
 iframe {
     width: 100%;
-    border: 1px solid #444;
+    border: 20px solid #000;
     border-radius: 1px;
 }
 #pauseButton {
