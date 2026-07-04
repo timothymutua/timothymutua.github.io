@@ -1,32 +1,3 @@
-var player;
-
-function onYouTubeIframeAPIReady() {
-player = new YT.Player('videoPlayer', {
-events: {
-'onReady': onPlayerReady
-}
-});
-}
-
-function onPlayerReady(event) {
-var pauseButton = document.getElementById('pauseButton');
-pauseButton.addEventListener('click', function() {
-player.pauseVideo();
-});
-}
-
-function pauseVideo() {
-player.pauseVideo();
-}
-function onPlayerReady(event) {
-event.target.playVideo();
-setTimeout(setShuffleFunction, 1000);           
-}
-function setShuffleFunction(){
-player.setShuffle(true);
-}
-
-
 let player;
 
 function onYouTubeIframeAPIReady() {
@@ -39,14 +10,15 @@ function onYouTubeIframeAPIReady() {
             list: "PLe4uLM1VB8ItC20Kc0ZzcGo3Sd0rpflkJ",
             autoplay: 1,
             loop: 1,
+            playlist: "PLe4uLM1VB8ItC20Kc0ZzcGo3Sd0rpflkJ", // Required for looping
             rel: 0,
             playsinline: 1
         },
 
         events: {
             onReady: onPlayerReady,
-            onError: onPlayerError,
-            onStateChange: onPlayerStateChange
+            onStateChange: onPlayerStateChange,
+            onError: onPlayerError
         }
     });
 }
@@ -54,15 +26,17 @@ function onYouTubeIframeAPIReady() {
 function onPlayerReady(event) {
     event.target.playVideo();
 
-    // Shuffle after playlist loads
+    // Shuffle once the playlist has loaded
     setTimeout(() => {
         try {
             player.setShuffle(true);
-        } catch (e) {}
+            player.playVideo();
+        } catch (e) {
+            console.log("Shuffle not available:", e);
+        }
     }, 1500);
 
     const pauseButton = document.getElementById("pauseButton");
-
     if (pauseButton) {
         pauseButton.addEventListener("click", () => {
             player.pauseVideo();
@@ -70,16 +44,24 @@ function onPlayerReady(event) {
     }
 }
 
-function onPlayerError(event) {
-    console.log("YouTube Error:", event.data);
-
-    // Skip unavailable videos
-    if ([2, 5, 100, 101, 150].includes(event.data)) {
-        console.log("Skipping unavailable video...");
+function onPlayerStateChange(event) {
+    // If video ends, automatically play the next shuffled video
+    if (event.data === YT.PlayerState.ENDED) {
         player.nextVideo();
     }
 }
 
-function onPlayerStateChange(event) {
-    console.log("State:", event.data);
+function onPlayerError(event) {
+    console.log("YouTube Error:", event.data);
+
+    // Skip blocked/private/deleted videos
+    if ([2, 5, 100, 101, 150].includes(event.data)) {
+        player.nextVideo();
+    }
+}
+
+function pauseVideo() {
+    if (player) {
+        player.pauseVideo();
+    }
 }
